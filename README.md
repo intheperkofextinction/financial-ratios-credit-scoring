@@ -1,1 +1,1 @@
-# financial-ratios-credit-scoring
+# financial-ratios-and-credit-scoring
