@@ -295,6 +295,16 @@ def score_to_rating(s):
 
 ---
 
+## Dashboard Preview
+<img width="2498" height="1223" alt="image" src="https://github.com/user-attachments/assets/f870c82b-d4c0-4351-ab7f-58654b6e3016" />
+<img width="2495" height="1209" alt="image" src="https://github.com/user-attachments/assets/3f586b5d-30c5-45c5-b05f-2589fba08695" />
+<img width="2496" height="1208" alt="image" src="https://github.com/user-attachments/assets/3d6db041-10a0-4ec9-84d7-d62cb893bfcc" />
+<img width="2489" height="1212" alt="image" src="https://github.com/user-attachments/assets/02843010-8787-4be7-93fa-c9bbcb4ed377" />
+
+
+
+
+
 ##  Dashboard Insights
 
 The dashboard enables users to:
