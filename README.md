@@ -32,6 +32,7 @@ The goal is to move beyond static Excel analysis and create a **scalable, repeat
 
 ##  Repository Structure
 
+```
 financial-ratios-credit-scoring/
 ├── data/
 │ ├── raw/ # Raw financial data
@@ -51,7 +52,7 @@ financial-ratios-credit-scoring/
 └── LICENSE
 
 
-
+```
 ---
 
 ##  Companies Covered
