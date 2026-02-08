@@ -46,7 +46,7 @@ financial-ratios-credit-scoring/
 │ ├── normalization.py # Global & sector normalization
 │ └── credit_scoring.py # Composite score & ratings
 ├── dashboard/
-│ └── app.py # Dashboard application
+│ └── powerBI # Dashboard application
 ├── requirements.txt
 ├── README.md
 └── LICENSE
@@ -330,11 +330,9 @@ pip install -r requirements.txt
 
 3. Run the dashboard:
 
-python dashboard/app.py  
+powerBI: https://github.com/intheperkofextinction/financial-ratios-credit-scoring/blob/main/credit%20risk%20analyss.pbix 
 
-Open your browser at:
 
-http://localhost:8050
 
 ---
 
