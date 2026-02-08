@@ -53,7 +53,7 @@ financial-ratios-credit-scoring/
 
 ---
 
-## 📌 Companies Covered
+##  Companies Covered
 
 The analysis is performed on a sample portfolio of large-cap Indian companies across multiple sectors:
 
@@ -68,12 +68,12 @@ The analysis is performed on a sample portfolio of large-cap Indian companies ac
 - Larsen & Toubro  
 - Bajaj Finance  
 
-> ⚠️ **Disclaimer:**  
+>  **Disclaimer:**  
 > This project is for educational and analytical purposes only and does not constitute investment advice.
 
 ---
 
-## 🔗 Data Source
+##  Data Source
 
 Financial data is sourced programmatically using the **`yahooquery`** Python library, which retrieves structured financial statements from Yahoo Finance.
 
@@ -90,7 +90,7 @@ Cash-flow–related metrics (where available)
 
 ---
 
-🧹 Data Cleaning & Preprocessing
+ Data Cleaning & Preprocessing
 
 Raw financial statement data often contains missing values, duplicates, and inconsistent formats.
 
@@ -159,51 +159,204 @@ Ratios are grouped into major analytical categories:
 
 ### Leverage & Risk
 
-Debt-to-Equity
+* Debt-to-Equity
 
-Interest Coverage
+* Interest Coverage
 
-Liquidity
+### Liquidity
 
-Current Ratio
+* Current Ratio
 
-Efficiency
+### Efficiency
 
-Asset Turnover
+* Asset Turnover
 
 Each ratio is implemented using standard finance definitions and calculated consistently across companies and years.
 
-Global Normalization (Min–Max Scaling)
+---
+
+## Global Normalization (Min–Max Scaling)
 
 Since ratios exist on different numerical scales, global normalization is applied:
 
-```
-Normalized
-=
-𝑥
-−
-min
-⁡
-(
-𝑥
-)
-max
-⁡
-(
-𝑥
-)
-−
-min
-⁡
-(
-𝑥
-)
-Normalized=
-max(x)−min(x)
-x−min(x)
-	​
 
+- Output range: **0 to 1**
+- If `max(x) = min(x)`, the normalized value is set to `NaN`
 
-Output range: 0 to 1
-```
 Ratios with no variation are set to NaN
+
+Normalized value is calculated as:
+
+**Normalized = (x − min(x)) / (max(x) − min(x))**
+
+- Output range: 0 to 1
+
+##  Sector-Based Normalization (Z-Score)
+
+To account for sector-specific characteristics, financial ratios are also normalized **within each sector**.  
+This ensures companies are evaluated relative to their industry peers, not just the overall dataset.
+
+### Z-Score Calculation
+
+Z = (x - mean_sector) / std_sector
+
+Where:
+- x = company’s ratio value  
+- mean_sector = average ratio value within the sector  
+- std_sector = standard deviation of the ratio within the sector  
+
+### Z-Score Scaling to 0–1
+
+To prevent extreme outliers from dominating the score, Z-scores are clipped and rescaled:
+
+Sector_Normalized = (clip(Z, -3, 3) + 3) / 6
+
+This maps sector-relative values to a 0–1 range.
+
+---
+
+##  Final Ratio Blending
+
+Each final ratio is a weighted combination of:
+
+- 70% global normalization  
+- 30% sector-based normalization  
+
+Final ratio calculation:
+
+final_ratio = 0.7 * global_norm + 0.3 * sector_norm
+
+All final ratios are clipped to the 0–1 range.
+
+---
+
+##  Composite Credit Score Construction
+
+A weighted composite credit score is calculated using the final normalized ratios.
+
+### Weights Used
+
+Metric | Weight
+------ | ------
+ROA | 15%
+Net Margin | 15%
+Asset Turnover | 10%
+Interest Coverage | 25%
+Debt-to-Equity | 20%
+Current Ratio | 15%
+
+### Credit Score Formula
+
+credit_score_raw = Σ (final_ratio_i × weight_i)
+
+Python implementation:
+
+df['credit_score_raw'] = (
+    df[list(valid_weights.keys())]
+      .mul(list(valid_weights.values()))
+      .sum(axis=1)
+)
+
+### Final Scaling
+
+credit_score = credit_score_raw × 100
+
+- Final score range: 0–100  
+- Higher score indicates stronger credit quality  
+
+---
+
+##  Credit Rating Mapping
+
+Composite credit scores are mapped to standard credit rating buckets:
+
+Score Range | Rating
+----------- | ------
+≥ 80 | AAA
+70–79 | AA
+60–69 | A
+50–59 | BBB
+40–49 | BB
+30–39 | B
+< 30 | CCC
+
+Rating logic:
+
+def score_to_rating(s):
+    if s >= 80: return 'AAA'
+    if s >= 70: return 'AA'
+    if s >= 60: return 'A'
+    if s >= 50: return 'BBB'
+    if s >= 40: return 'BB'
+    if s >= 30: return 'B'
+    return 'CCC'
+
+---
+
+##  Dashboard Insights
+
+The dashboard enables users to:
+- Compare risk versus profitability
+- Identify high-quality versus leveraged companies
+- Analyze sector-wise credit strength
+- Track earnings stability and volatility
+- Perform portfolio-level risk assessment
+
+The dashboard is designed to support **decision-making**, not just visualization.
+
+---
+
+##  Technology Stack
+
+- Python (pandas, numpy)
+- yahooquery (financial data sourcing)
+- Plotly / Dash / Power BI (visualization)
+- Git & GitHub (version control)
+
+---
+
+##  How to Run the Project
+
+1. Clone the repository:
+
+git clone https://github.com/intheperkofextinction/financial-ratios-credit-scoring.git  
+cd financial-ratios-credit-scoring  
+
+2. Install dependencies:
+
+pip install -r requirements.txt  
+
+3. Run the dashboard:
+
+python dashboard/app.py  
+
+Open your browser at:
+
+http://localhost:8050
+
+---
+
+##  Future Improvements
+
+Potential enhancements include:
+- Cash-flow–based ratios
+- Time-series trend weighting
+- Macroeconomic overlays
+- Automated portfolio optimization
+- Model validation against default events
+
+---
+
+##  License
+
+This project is licensed under the terms specified in the LICENSE file.
+
+---
+
+##  Author
+
+Amal  
+Finance | Analytics | Credit Risk  
+GitHub: https://github.com/intheperkofextinction
+
+
