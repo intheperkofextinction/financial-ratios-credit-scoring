@@ -88,15 +88,19 @@ Balance sheet items
 
 Cash-flow–related metrics (where available)
 
+---
+
 🧹 Data Cleaning & Preprocessing
 
 Raw financial statement data often contains missing values, duplicates, and inconsistent formats.
 
 Key Cleaning Steps
+
 1. Year Extraction
 ```python
 income_clean["year"] = pd.to_datetime(income_clean["asOfDate"]).dt.year
 ```
+
 2. Column Selection & Renaming
 
 Only relevant financial fields are retained and renamed for clarity:
@@ -111,6 +115,7 @@ Operating Income
 
 Net Income
 
+
 3. Missing Value Handling
 ```python
 income_clean = income_clean.dropna(
@@ -124,6 +129,7 @@ Rows with all key metrics missing are removed
 Partial NaNs are handled downstream
 
 Duplicate Removal
+
 ```python
 income_clean = income_clean.drop_duplicates(
     subset=["ticker", "year"], keep="first"
@@ -137,19 +143,21 @@ Numeric columns cast to float
 
 Data sorted by company and year
 
-Financial Ratio Calculation
+---
+
+## Financial Ratio Calculation
 
 Ratios are grouped into major analytical categories:
 
-Profitability
+### Profitability
 
-Return on Assets (ROA)
+* Return on Assets (ROA)
 
-Return on Equity (ROE)
+* Return on Equity (ROE)
 
-Net Margin
+* Net Margin
 
-Leverage & Risk
+### Leverage & Risk
 
 Debt-to-Equity
 
