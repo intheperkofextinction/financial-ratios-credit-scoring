@@ -295,11 +295,16 @@ def score_to_rating(s):
 
 ---
 
-## Dashboard Preview
+## Dashboard And Chart Preview
 <img width="2498" height="1223" alt="image" src="https://github.com/user-attachments/assets/f870c82b-d4c0-4351-ab7f-58654b6e3016" />
 <img width="2495" height="1209" alt="image" src="https://github.com/user-attachments/assets/3f586b5d-30c5-45c5-b05f-2589fba08695" />
 <img width="2496" height="1208" alt="image" src="https://github.com/user-attachments/assets/3d6db041-10a0-4ec9-84d7-d62cb893bfcc" />
 <img width="2489" height="1212" alt="image" src="https://github.com/user-attachments/assets/02843010-8787-4be7-93fa-c9bbcb4ed377" />
+<img width="1838" height="792" alt="image" src="https://github.com/user-attachments/assets/6ecbee90-9d4d-4d1c-8097-732517d5336c" />
+<img width="2386" height="695" alt="image" src="https://github.com/user-attachments/assets/13fe2d6c-5f27-45c1-a5e1-a4bd0b70f289" />
+<img width="906" height="522" alt="image" src="https://github.com/user-attachments/assets/65302af3-0010-4efb-9cab-852e19dbe66b" />
+<img width="1717" height="671" alt="image" src="https://github.com/user-attachments/assets/48556cad-b820-42fa-8b69-1a7002bed6e8" />
+
 
 
 
